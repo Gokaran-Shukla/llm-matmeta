@@ -1,0 +1,15 @@
+ vasp.6.4.2 20Jul23 (build Oct 10 2023 12:00:00) complex
+ executed on             LinuxIFC date 2026.10.30  10:12:41
+ running on   64 total cores
+ POTCAR:    PAW_PBE Fe_pv 02Aug2007
+   GGA     =    PE    GGA type
+   LEXCH   =    PE    internally used exchange-correlation
+   ENCUT  =  500.0 eV  36.75 Ry    6.06 a0
+   ... (output truncated in this example) ...
+  free  energy   TOTEN  =       -16.40213307 eV
+ E-fermi :   9.4532     XC(G=0):  -11.4082     alpha+bet :  -6.2521
+ number of electron      16.0000000 magnetization       4.4521006
+  free  energy   TOTEN  =       -16.46318822 eV
+ E-fermi :   9.4817     XC(G=0):  -11.4105     alpha+bet :  -6.2521
+ number of electron      16.0000000 magnetization       4.4702851
+ aborting loop because EDIFF is reached

@@ -1,0 +1,108 @@
+{
+  "@context": {
+    "mm": "https://example.org/matmeta#",
+    "unit": "mm:unit",
+    "value": "mm:value",
+    "software": "mm:Software",
+    "name": "mm:name",
+    "version": "mm:softwareVersion",
+    "method": "mm:SimulationMethod",
+    "task": "mm:calculationTask",
+    "xc_functional": "mm:exchangeCorrelationFunctional",
+    "spin_polarized": "mm:isSpinPolarized",
+    "spin_orbit_coupling": "mm:includesSpinOrbitCoupling",
+    "noncollinear": "mm:isNoncollinear",
+    "hubbard_u": "mm:usesHubbardU",
+    "van_der_waals_correction": "mm:vanDerWaalsCorrection",
+    "structure": "mm:AtomicStructure",
+    "formula": "mm:chemicalFormula",
+    "n_atoms": "mm:numberOfAtoms",
+    "species": "mm:chemicalSpecies",
+    "lattice_vectors_angstrom": "mm:latticeVectors",
+    "numerics": "mm:NumericalParameters",
+    "plane_wave_cutoff_eV": "mm:planeWaveCutoff",
+    "kpoint_mesh": "mm:kPointMesh",
+    "smearing_type": "mm:smearingMethod",
+    "smearing_width_eV": "mm:smearingWidth",
+    "energy_convergence_eV": "mm:energyConvergenceThreshold",
+    "results": "mm:SimulationResults",
+    "converged": "mm:isConverged",
+    "total_energy_eV": "mm:totalEnergy",
+    "fermi_energy_eV": "mm:fermiEnergy",
+    "total_magnetization_muB": "mm:totalMagnetization",
+    "notes": "mm:comment"
+  },
+  "@type": "mm:DFTCalculation",
+  "@id": "examples/vasp_Fe_bcc",
+  "software": {
+    "name": "VASP",
+    "version": "6.4.2"
+  },
+  "method": {
+    "task": "scf",
+    "xc_functional": "PBE",
+    "spin_polarized": true
+  },
+  "structure": {
+    "lattice_vectors_angstrom": {
+      "value": [
+        [
+          2.83,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          2.83,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          2.83
+        ]
+      ],
+      "unit": "angstrom"
+    },
+    "formula": "Fe2",
+    "n_atoms": 2,
+    "species": [
+      "Fe"
+    ]
+  },
+  "numerics": {
+    "kpoint_mesh": [
+      16,
+      16,
+      16
+    ],
+    "energy_convergence_eV": {
+      "value": 1e-07,
+      "unit": "eV"
+    },
+    "smearing_type": "Methfessel-Paxton",
+    "smearing_width_eV": {
+      "value": 0.1,
+      "unit": "eV"
+    },
+    "plane_wave_cutoff_eV": {
+      "value": 500.0,
+      "unit": "eV"
+    }
+  },
+  "results": {
+    "converged": true,
+    "total_energy_eV": {
+      "value": -16.46318822,
+      "unit": "eV"
+    },
+    "total_magnetization_muB": {
+      "value": 4.4702851,
+      "unit": "Bohr magneton"
+    },
+    "fermi_energy_eV": {
+      "value": 9.4817,
+      "unit": "eV"
+    }
+  }
+}

@@ -1,0 +1,5 @@
+We compute the magnetic moments and magnetocrystalline anisotropy of bulk bcc Fe and fcc Ni using
+density functional theory with the PBE functional and spin-orbit coupling, as implemented in VASP.
+The calculated spin moments of 2.2 Bohr magnetons for Fe and 0.6 Bohr magnetons for Ni agree with
+magnetometry data. We further use Wannier-based tight-binding models to evaluate the orbital Hall
+conductivity of both metals.

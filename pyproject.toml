@@ -1,0 +1,34 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "llm-matmeta"
+version = "0.1.0"
+description = "Hybrid rule-based + LLM metadata extraction for computational materials-science data (VASP, Quantum ESPRESSO, paper abstracts)."
+readme = "README.md"
+license = { text = "MIT" }
+authors = [{ name = "Gokaran Shukla", email = "gokaran.shukla@kaust.edu.sa" }]
+requires-python = ">=3.9"
+dependencies = ["requests>=2.25", "jsonschema>=4.18"]
+keywords = ["materials science", "metadata", "LLM", "FAIR data", "DFT", "VASP", "Quantum ESPRESSO"]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "License :: OSI Approved :: MIT License",
+  "Topic :: Scientific/Engineering :: Physics",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=7"]
+
+[project.scripts]
+matmeta = "matmeta.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/Gokaran-Shukla/llm-matmeta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
