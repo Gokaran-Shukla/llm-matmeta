@@ -15,6 +15,11 @@ authors:
     orcid: "https://orcid.org/0000-0001-9332-3332"
     affiliation: "King Abdullah University of Science and Technology (KAUST)"
     email: gokaran.shukla@kaust.edu.sa
+doi: "10.5281/zenodo.24334736"
+identifiers:
+  - type: doi
+    value: "10.5281/zenodo.24334736"
+    description: "Zenodo archive of version 0.1.0"
 repository-code: "https://github.com/Gokaran-Shukla/llm-matmeta"
 license: MIT
 version: 0.1.0

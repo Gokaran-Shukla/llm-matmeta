@@ -1,5 +1,6 @@
 # llm-matmeta
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.24334736.svg)](https://doi.org/10.5281/zenodo.24334736)
 [![tests](https://github.com/Gokaran-Shukla/llm-matmeta/actions/workflows/tests.yml/badge.svg)](https://github.com/Gokaran-Shukla/llm-matmeta/actions/workflows/tests.yml)
 
 **Hybrid rule-based + LLM metadata extraction for computational materials-science data.**
@@ -132,6 +133,26 @@ examples/      small VASP and QE runs and an example abstract
 
 Gokaran Shukla, King Abdullah University of Science and Technology (KAUST)
 [gokaran-shukla.github.io](https://gokaran-shukla.github.io)
+
+## Citing llm-matmeta
+
+If llm-matmeta helps your work, please cite the software:
+
+> G. Shukla, *llm-matmeta: hybrid rule-based and LLM metadata extraction for computational materials science*, version 0.1.0 (2026). Zenodo. https://doi.org/10.5281/zenodo.24334736
+
+```bibtex
+@software{shukla_llmmatmeta_2026,
+  author    = {Shukla, Gokaran},
+  title     = {llm-matmeta: hybrid rule-based and LLM metadata extraction for computational materials science},
+  version   = {0.1.0},
+  year      = {2026},
+  publisher = {Zenodo},
+  doi       = {10.5281/zenodo.24334736},
+  url       = {https://github.com/Gokaran-Shukla/llm-matmeta}
+}
+```
+
+GitHub's **"Cite this repository"** button (from `CITATION.cff`) gives the same reference in APA and BibTeX.
 
 ## License
 
