@@ -1,0 +1,31 @@
+cff-version: 1.2.0
+message: "If you use llm-matmeta in your work, please cite it as below."
+title: "llm-matmeta: hybrid rule-based and LLM metadata extraction for computational materials science"
+abstract: >-
+  llm-matmeta turns the semi-structured output of DFT codes (VASP, Quantum ESPRESSO) and the
+  unstructured text of paper abstracts into validated, machine-readable metadata (JSON and
+  JSON-LD). Exact rule-based parsers produce a trusted draft, a large language model reads
+  condensed evidence into schema-validated JSON, and the two are merged with per-field
+  provenance and an explicit list of conflicts, giving FAIR records with ontology mapping.
+  Local open-weight models are supported.
+type: software
+authors:
+  - family-names: Shukla
+    given-names: Gokaran
+    orcid: "https://orcid.org/0000-0001-9332-3332"
+    affiliation: "King Abdullah University of Science and Technology (KAUST)"
+    email: gokaran.shukla@kaust.edu.sa
+repository-code: "https://github.com/Gokaran-Shukla/llm-matmeta"
+license: MIT
+version: 0.1.0
+date-released: 2026-11-08
+keywords:
+  - "FAIR data"
+  - "metadata extraction"
+  - "large language models"
+  - "materials science"
+  - "density functional theory"
+  - "VASP"
+  - "Quantum ESPRESSO"
+  - "JSON-LD"
+  - "research data management"
