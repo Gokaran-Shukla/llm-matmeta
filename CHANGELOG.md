@@ -11,7 +11,7 @@
   `hasPart` in JSON-LD.
 - Long files are condensed (head + tail + keyword windows) before being sent to the model.
 - New result fields `energy_sigma0_eV` and `magnetization_vector_muB`.
-- `docs/llm-matmeta-formalism.pdf`: full formalism of the pipeline.
+- `docs/llm-matmeta-formalism.pdf`: full formalism of the pipeline; `docs/llm-matmeta-slides.pdf`: Beamer talk.
 - Example `examples/vasp_Fe_soc` (SOC, moment along z, Wannier90 output, SLURM script); 19 new tests.
 
 ### Fixed

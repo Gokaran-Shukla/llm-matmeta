@@ -8,6 +8,7 @@
 📄 **Full formalism:** [`docs/llm-matmeta-formalism.pdf`](docs/llm-matmeta-formalism.pdf), with definitions of every
 operator (evidence, merge, provenance, quote verification), the VASP default rules, and what each check can
 and cannot guarantee.
+🎞️ **Slides:** [`docs/llm-matmeta-slides.pdf`](docs/llm-matmeta-slides.pdf) (Beamer, 16:9; source `docs/slides.tex`).
 
 `llm-matmeta` turns the semi-structured output of DFT codes (VASP, Quantum ESPRESSO) and the
 unstructured text of paper abstracts into validated, machine-readable metadata (JSON and JSON-LD).

@@ -10,3 +10,7 @@ docs/*.log
 docs/*.out
 docs/*.toc
 docs/formalism.pdf
+docs/*.nav
+docs/*.snm
+docs/*.vrb
+docs/slides.pdf
