@@ -5,13 +5,13 @@
       "version": "6.4.2"
     },
     "method": {
-      "hubbard_u": null,
-      "xc_functional": "PBE",
-      "task": "scf",
+      "spin_orbit_coupling": null,
       "spin_polarized": true,
       "noncollinear": null,
-      "van_der_waals_correction": null,
-      "spin_orbit_coupling": null
+      "hubbard_u": null,
+      "task": "scf",
+      "xc_functional": "PBE",
+      "van_der_waals_correction": null
     },
     "structure": {
       "lattice_vectors_angstrom": [
@@ -32,27 +32,29 @@
         ]
       ],
       "n_atoms": 2,
+      "formula": "Fe2",
       "species": [
         "Fe"
-      ],
-      "formula": "Fe2"
+      ]
     },
     "numerics": {
+      "energy_convergence_eV": 1e-07,
       "smearing_type": "Methfessel-Paxton",
-      "smearing_width_eV": 0.1,
+      "plane_wave_cutoff_eV": 500.0,
       "kpoint_mesh": [
         16,
         16,
         16
       ],
-      "plane_wave_cutoff_eV": 500.0,
-      "energy_convergence_eV": 1e-07
+      "smearing_width_eV": 0.1
     },
     "results": {
-      "total_energy_eV": -16.46318822,
       "fermi_energy_eV": 9.4817,
-      "converged": true,
-      "total_magnetization_muB": 4.4702851
+      "total_energy_eV": -16.46318822,
+      "energy_sigma0_eV": null,
+      "total_magnetization_muB": 4.4702851,
+      "magnetization_vector_muB": null,
+      "converged": true
     },
     "notes": null
   },
@@ -71,7 +73,9 @@
     "numerics.smearing_type": "parser",
     "numerics.smearing_width_eV": "parser",
     "results.converged": "parser",
+    "results.energy_sigma0_eV": "missing",
     "results.fermi_energy_eV": "parser",
+    "results.magnetization_vector_muB": "missing",
     "results.total_energy_eV": "parser",
     "results.total_magnetization_muB": "parser",
     "software.name": "parser",
@@ -84,17 +88,19 @@
   "conflicts": [],
   "validation_errors": [],
   "llm_validation_errors": [],
+  "llm_error": null,
   "source": {
     "path": "examples/vasp_Fe_bcc",
     "code": "vasp",
     "files": [
       "INCAR",
-      "POSCAR",
       "KPOINTS",
-      "OUTCAR"
+      "OUTCAR",
+      "POSCAR"
     ],
-    "extracted_at": "2026-11-08T10:00:00+00:00",
-    "extractor": "llm-matmeta 0.1.0",
+    "structure_from": "POSCAR",
+    "extracted_at": "2026-11-19T14:54:09+00:00",
+    "extractor": "llm-matmeta 0.2.0",
     "llm_used": false
   }
 }

@@ -5,3 +5,8 @@ build/
 dist/
 .venv/
 .env
+docs/*.aux
+docs/*.log
+docs/*.out
+docs/*.toc
+docs/formalism.pdf

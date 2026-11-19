@@ -14,6 +14,7 @@ from typing import Any
 DEFAULT_NAMESPACE = "https://example.org/matmeta#"
 
 FIELD_TERMS = {
+    # calculation
     "software": "Software", "name": "name", "version": "softwareVersion",
     "method": "SimulationMethod", "task": "calculationTask", "xc_functional": "exchangeCorrelationFunctional",
     "spin_polarized": "isSpinPolarized", "spin_orbit_coupling": "includesSpinOrbitCoupling",
@@ -25,14 +26,37 @@ FIELD_TERMS = {
     "kpoint_mesh": "kPointMesh", "smearing_type": "smearingMethod", "smearing_width_eV": "smearingWidth",
     "energy_convergence_eV": "energyConvergenceThreshold",
     "results": "SimulationResults", "converged": "isConverged", "total_energy_eV": "totalEnergy",
-    "fermi_energy_eV": "fermiEnergy", "total_magnetization_muB": "totalMagnetization", "notes": "comment",
+    "energy_sigma0_eV": "totalEnergyZeroSmearing",
+    "fermi_energy_eV": "fermiEnergy", "total_magnetization_muB": "totalMagnetization",
+    "magnetization_vector_muB": "magnetizationVector", "notes": "comment",
+    # wannier90
+    "system": "WannierSystem", "num_wann": "numberOfWannierFunctions", "num_bands": "numberOfBands",
+    "spinors": "usesSpinors", "disentanglement": "Disentanglement", "used": "isUsed",
+    "outer_window_min_eV": "outerWindowMin", "outer_window_max_eV": "outerWindowMax",
+    "frozen_window_min_eV": "frozenWindowMin", "frozen_window_max_eV": "frozenWindowMax",
+    "final_omega_i_A2": "finalOmegaI", "wannierisation": "Wannierisation", "num_iter": "numberOfIterations",
+    "omega_i_A2": "omegaI", "omega_d_A2": "omegaD", "omega_od_A2": "omegaOD", "omega_total_A2": "totalSpread",
+    # job script
+    "scheduler": "scheduler", "job_name": "jobName", "resources": "ComputeResources", "partition": "partition",
+    "nodes": "numberOfNodes", "ntasks": "numberOfTasks", "ntasks_per_node": "tasksPerNode",
+    "cpus_per_task": "cpusPerTask", "gpus": "gpusPerNode", "memory": "memory", "time_limit": "timeLimit",
+    "constraint": "nodeConstraint", "modules": "loadedModules", "executable": "executable",
+    "launcher": "launcher",
+    # links
+    "attachments": "hasPart", "file": "fileName",
 }
 
 UNITS = {
     "plane_wave_cutoff_eV": "eV", "smearing_width_eV": "eV", "energy_convergence_eV": "eV",
-    "total_energy_eV": "eV", "fermi_energy_eV": "eV", "total_magnetization_muB": "Bohr magneton",
+    "total_energy_eV": "eV", "energy_sigma0_eV": "eV", "fermi_energy_eV": "eV",
+    "total_magnetization_muB": "Bohr magneton", "magnetization_vector_muB": "Bohr magneton",
     "lattice_vectors_angstrom": "angstrom",
+    "outer_window_min_eV": "eV", "outer_window_max_eV": "eV", "frozen_window_min_eV": "eV",
+    "frozen_window_max_eV": "eV", "final_omega_i_A2": "square angstrom", "omega_i_A2": "square angstrom",
+    "omega_d_A2": "square angstrom", "omega_od_A2": "square angstrom", "omega_total_A2": "square angstrom",
 }
+
+TYPES = {"wannier": "mm:Wannier90Run", "jobscript": "mm:BatchJob", "calculation": "mm:Calculation"}
 
 
 def default_context(namespace: str = DEFAULT_NAMESPACE) -> dict[str, Any]:
@@ -61,6 +85,12 @@ def to_jsonld(result: dict[str, Any], context: dict[str, Any] | None = None, rec
     if record_id:
         doc["@id"] = record_id
     doc.update(_annotate(result["metadata"]))
+    parts = [
+        {"@type": TYPES.get(a["source"]["schema"], "mm:File"), "file": a.get("file"), **_annotate(a["metadata"])}
+        for a in result.get("attachments", [])
+    ]
+    if parts:
+        doc["attachments"] = parts
     return doc
 
 

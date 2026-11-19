@@ -5,6 +5,10 @@
 
 **Hybrid rule-based + LLM metadata extraction for computational materials-science data.**
 
+📄 **Full formalism:** [`docs/llm-matmeta-formalism.pdf`](docs/llm-matmeta-formalism.pdf), with definitions of every
+operator (evidence, merge, provenance, quote verification), the VASP default rules, and what each check can
+and cannot guarantee.
+
 `llm-matmeta` turns the semi-structured output of DFT codes (VASP, Quantum ESPRESSO) and the
 unstructured text of paper abstracts into validated, machine-readable metadata (JSON and JSON-LD).
 It is a small prototype for making simulation data **FAIR** (findable, accessible, interoperable,
@@ -34,6 +38,9 @@ for. This tool uses both and checks one against the other:
   blind spots.
 * **Provider-agnostic:** works with any OpenAI-compatible endpoint, including local open-weight
   models through Ollama or vLLM, so research data never has to leave the institution.
+* **LLM-only files with quote checking (v0.2):** for files no parser understands (Wannier90 `.wout`,
+  batch job scripts, other codes' output), the model must return the exact source line for every value.
+  matmeta checks that the line is in the file and contains the value; failures are flagged, or removed with `--strict`.
 * **Ontology mapping:** records can be exported as JSON-LD with a user-supplied context that maps
   fields to the terms of a target ontology.
 
@@ -42,8 +49,9 @@ for. This tool uses both and checks one against the other:
 ```bash
 git clone https://github.com/Gokaran-Shukla/llm-matmeta.git
 cd llm-matmeta
+python -m pip install --upgrade pip   # editable installs need pip >= 21.3
 pip install -e ".[dev]"
-pytest -q          # 12 tests, run fully offline
+pytest -q          # 31 tests, run fully offline
 ```
 
 ## Configure an LLM
@@ -74,9 +82,20 @@ matmeta calc examples/vasp_Fe_bcc --no-llm
 # batch processing, JSON-LD output, custom ontology mapping
 matmeta calc runs/*/ --jsonld --context my_ontology_context.json -o metadata/
 
+# also read Wannier90 .wout files and job scripts found in the run directory
+matmeta calc examples/vasp_Fe_soc --extras
+
+# any file without a parser: LLM only, every value checked against its quoted line
+matmeta file examples/vasp_Fe_soc/wannier90.wout          # schema detected: wannier
+matmeta file examples/vasp_Fe_soc/z_jobs_ibex             # schema detected: jobscript
+matmeta file siesta.out --schema calculation --strict     # drop values that fail the check
+
 # materials / methods / properties from paper abstracts
 matmeta abstract examples/abstract.txt
 ```
+
+Diagnostics go to stderr: `[conflict]` (parser and LLM disagree), `[unverified]` (quote check failed),
+`[warning]` (LLM unreachable or invalid reply; the parser record is still written) and `[error]`.
 
 From Python:
 
@@ -100,31 +119,40 @@ Example output (parser-only mode) is in [`examples/output/`](examples/output/).
 | method     | task (scf / relax / vc-relax / nscf / bands / md / phonon), XC functional, spin polarisation, spin–orbit coupling, noncollinear magnetism, DFT+U, van der Waals correction |
 | structure  | formula, number of atoms, species, lattice vectors (Å) |
 | numerics   | plane-wave cutoff, k-point mesh, smearing type and width, energy convergence threshold (all in eV) |
-| results    | convergence, total energy, Fermi energy, total magnetisation |
+| results    | convergence, total (free) energy, energy(σ→0), Fermi energy, total magnetisation and, for noncollinear runs, the (mx, my, mz) vector |
+| Wannier90  | release, num_wann, num_bands, MP grid, spinors, outer/frozen windows, disentanglement convergence and Ω_I, wannierisation convergence, Ω_I, Ω_D, Ω_OD, total spread (Å²) |
+| job scripts| scheduler, job name, partition, nodes, tasks, CPUs, GPUs, memory, time limit, constraint, loaded modules, executable, launcher |
 | abstracts  | materials (formula, dimensionality, role), methods (computational / experimental / theoretical, software), reported properties with values and units, keywords |
 
-Units are normalised (Ry → eV for Quantum ESPRESSO). The full schemas are in
+Units are normalised (Ry → eV for Quantum ESPRESSO). For VASP, tags missing from the INCAR are taken from
+the parameter block VASP prints in the OUTCAR (with VASP's own defaults as a last resort), relaxations report
+the CONTCAR structure, and OUTCARs are streamed (constant memory, `.gz` accepted). The full schemas are in
 [`src/matmeta/schema.py`](src/matmeta/schema.py).
 
 ## Project layout
 
 ```
 src/matmeta/
-  parsers.py   rule-based VASP and Quantum ESPRESSO parsers + evidence condensation
+  parsers.py   streamed rule-based VASP and Quantum ESPRESSO parsers + evidence text
   llm.py       OpenAI-compatible client and an offline mock client
-  extract.py   pipeline: prompt, validation/retry, merge, provenance, conflicts
-  schema.py    JSON schemas for calculations and abstracts
+  prompting.py prompt construction and the validate-and-retry loop
+  extract.py   hybrid pipeline: merge, provenance, conflicts, LLM fallback, --extras
+  files.py     LLM-only files: condensation, quote verification, file-type detection
+  schema.py    JSON schemas: calculation, abstract, wannier, jobscript
   mapping.py   JSON-LD export with configurable ontology context
   cli.py       `matmeta` command-line tool
 tests/         offline unit tests (parsers, merge logic, retries, HTTP client, CLI)
-examples/      small VASP and QE runs and an example abstract
+examples/      small VASP and QE runs (incl. a SOC + Wannier90 + SLURM run) and an example abstract
+docs/          formalism (LaTeX source and PDF)
 ```
 
 ## Roadmap
 
 - Benchmark extraction accuracy of several open-weight and hosted LLMs on a curated set of real
   calculations (precision/recall per field).
-- More codes (SIESTA, Wannier90, phonopy, LAMMPS) and experimental file formats.
+- Consistency checks on extracted records (e.g. Ω = Ω_I + Ω_D + Ω_OD) to catch misattributed values.
+- Rule-based parsers for more codes (SIESTA, Wannier90, phonopy, LAMMPS), moving them from the LLM-only to
+  the hybrid path, and experimental file formats.
 - Mapping to community ontologies for materials science and export to research-data platforms.
 - Batch extraction from full-text papers, with links between publications and the underlying
   simulation data.

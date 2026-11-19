@@ -1,0 +1,10 @@
+SYSTEM  = bcc Fe, SOC, moment along z, for Wannier90
+ENCUT   = 450
+ISPIN   = 2
+LSORBIT = .TRUE.
+MAGMOM  = 0 0 2.5
+SAXIS   = 0 0 1
+ISMEAR  = 0 ; SIGMA = 0.05
+EDIFF   = 1E-8
+LWANNIER90 = .TRUE.
+NBANDS  = 48

@@ -4,8 +4,8 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "llm-matmeta"
-version = "0.1.0"
-description = "Hybrid rule-based + LLM metadata extraction for computational materials-science data (VASP, Quantum ESPRESSO, paper abstracts)."
+version = "0.2.0"
+description = "Hybrid rule-based + LLM metadata extraction for computational materials-science data (VASP, Quantum ESPRESSO, Wannier90, job scripts, paper abstracts)."
 readme = "README.md"
 license = { text = "MIT" }
 authors = [{ name = "Gokaran Shukla", email = "gokaran.shukla@kaust.edu.sa" }]
