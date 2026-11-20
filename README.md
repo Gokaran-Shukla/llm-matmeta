@@ -1,5 +1,7 @@
 # llm-matmeta
 
+📘 **Complete manual (PDF):** [docs/llm-matmeta_manual.pdf](docs/llm-matmeta_manual.pdf) — documentation, tutorials and quizzes in one file.
+
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.24334736.svg)](https://doi.org/10.5281/zenodo.24334736)
 [![tests](https://github.com/Gokaran-Shukla/llm-matmeta/actions/workflows/tests.yml/badge.svg)](https://github.com/Gokaran-Shukla/llm-matmeta/actions/workflows/tests.yml)
 
