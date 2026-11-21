@@ -1,0 +1,31 @@
+ vasp.6.4.2 20Jul23 (build Oct 10 2023 12:00:00) complex
+ executed on             LinuxIFC date 2026.11.19  09:01:12
+ running on   80 total cores
+ POTCAR:    PAW_PBE Fe_pv 02Aug2007
+ POTCAR:    PAW_PBE Fe_pv 02Aug2007
+   ... (output truncated in this example) ...
+   ISPIN  =      2    spin polarized calculation?
+   LNONCOLLINEAR =      T non collinear calculations
+   LSORBIT =      T    spin-orbit coupling
+   ENCUT  =  450.0 eV  33.07 Ry    5.75 a0
+   NSW    =      0    number of steps for IOM
+   IBRION =     -1    ionic relax: 0-MD 1-quasi-New 2-CG
+   ISIF   =      2    stress and relaxation
+   ISMEAR =     0;   SIGMA  =   0.05  broadening in eV -4-tet -1-fermi 0-gaus
+   EDIFF  = 0.1E-07   stopping-criterion for ELM
+   ICHARG =      2    charge: 1-file 2-atom 10-const
+   GGA     =    --    GGA type
+   LEXCH   =    PE    internally used exchange-correlation
+   LDAU   =      F    DFT+U
+   LHFCALC =     F    Hartree Fock is set to
+   LWANNIER90 =  T
+   ... (output truncated in this example) ...
+  free  energy   TOTEN  =        -8.29514113 eV
+  energy  without entropy=       -8.29480011  energy(sigma->0) =       -8.29497062
+ E-fermi :   9.1207     XC(G=0):  -11.2950     alpha+bet :  -5.9811
+ number of electron       8.0000000 magnetization       0.0000012      -0.0000034       2.2301456
+  free  energy   TOTEN  =        -8.29531207 eV
+  energy  without entropy=       -8.29497115  energy(sigma->0) =       -8.29514161
+ E-fermi :   9.1214     XC(G=0):  -11.2951     alpha+bet :  -5.9811
+ number of electron       8.0000000 magnetization       0.0000011      -0.0000031       2.2310872
+ aborting loop because EDIFF is reached

@@ -28,9 +28,45 @@
     "results": "mm:SimulationResults",
     "converged": "mm:isConverged",
     "total_energy_eV": "mm:totalEnergy",
+    "energy_sigma0_eV": "mm:totalEnergyZeroSmearing",
     "fermi_energy_eV": "mm:fermiEnergy",
     "total_magnetization_muB": "mm:totalMagnetization",
-    "notes": "mm:comment"
+    "magnetization_vector_muB": "mm:magnetizationVector",
+    "notes": "mm:comment",
+    "system": "mm:WannierSystem",
+    "num_wann": "mm:numberOfWannierFunctions",
+    "num_bands": "mm:numberOfBands",
+    "spinors": "mm:usesSpinors",
+    "disentanglement": "mm:Disentanglement",
+    "used": "mm:isUsed",
+    "outer_window_min_eV": "mm:outerWindowMin",
+    "outer_window_max_eV": "mm:outerWindowMax",
+    "frozen_window_min_eV": "mm:frozenWindowMin",
+    "frozen_window_max_eV": "mm:frozenWindowMax",
+    "final_omega_i_A2": "mm:finalOmegaI",
+    "wannierisation": "mm:Wannierisation",
+    "num_iter": "mm:numberOfIterations",
+    "omega_i_A2": "mm:omegaI",
+    "omega_d_A2": "mm:omegaD",
+    "omega_od_A2": "mm:omegaOD",
+    "omega_total_A2": "mm:totalSpread",
+    "scheduler": "mm:scheduler",
+    "job_name": "mm:jobName",
+    "resources": "mm:ComputeResources",
+    "partition": "mm:partition",
+    "nodes": "mm:numberOfNodes",
+    "ntasks": "mm:numberOfTasks",
+    "ntasks_per_node": "mm:tasksPerNode",
+    "cpus_per_task": "mm:cpusPerTask",
+    "gpus": "mm:gpusPerNode",
+    "memory": "mm:memory",
+    "time_limit": "mm:timeLimit",
+    "constraint": "mm:nodeConstraint",
+    "modules": "mm:loadedModules",
+    "executable": "mm:executable",
+    "launcher": "mm:launcher",
+    "attachments": "mm:hasPart",
+    "file": "mm:fileName"
   },
   "@type": "mm:DFTCalculation",
   "@id": "examples/vasp_Fe_bcc",
@@ -39,11 +75,13 @@
     "version": "6.4.2"
   },
   "method": {
+    "spin_polarized": true,
     "task": "scf",
-    "xc_functional": "PBE",
-    "spin_polarized": true
+    "xc_functional": "PBE"
   },
   "structure": {
+    "n_atoms": 2,
+    "formula": "Fe2",
     "lattice_vectors_angstrom": {
       "value": [
         [
@@ -64,13 +102,16 @@
       ],
       "unit": "angstrom"
     },
-    "formula": "Fe2",
-    "n_atoms": 2,
     "species": [
       "Fe"
     ]
   },
   "numerics": {
+    "smearing_type": "Methfessel-Paxton",
+    "smearing_width_eV": {
+      "value": 0.1,
+      "unit": "eV"
+    },
     "kpoint_mesh": [
       16,
       16,
@@ -80,17 +121,16 @@
       "value": 1e-07,
       "unit": "eV"
     },
-    "smearing_type": "Methfessel-Paxton",
-    "smearing_width_eV": {
-      "value": 0.1,
-      "unit": "eV"
-    },
     "plane_wave_cutoff_eV": {
       "value": 500.0,
       "unit": "eV"
     }
   },
   "results": {
+    "fermi_energy_eV": {
+      "value": 9.4817,
+      "unit": "eV"
+    },
     "converged": true,
     "total_energy_eV": {
       "value": -16.46318822,
@@ -99,10 +139,6 @@
     "total_magnetization_muB": {
       "value": 4.4702851,
       "unit": "Bohr magneton"
-    },
-    "fermi_energy_eV": {
-      "value": 9.4817,
-      "unit": "eV"
     }
   }
 }

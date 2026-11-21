@@ -1,0 +1,16 @@
+#!/bin/bash
+#SBATCH --job-name=fe_soc_wan
+#SBATCH --nodes=2
+#SBATCH --ntasks-per-node=40
+#SBATCH --time=24:00:00
+#SBATCH --partition=batch
+#SBATCH --mem=360G
+#SBATCH --constraint=cascadelake
+#SBATCH --output=std.out
+#SBATCH --error=std.err
+
+module purge
+module load intel/2020 vasp/6.4.2 wannier90/3.1.0
+
+srun -n 80 vasp_ncl
+wannier90.x wannier90
